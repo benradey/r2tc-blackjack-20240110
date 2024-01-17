@@ -32,5 +32,13 @@ public class WalletTest {
                 .isZero();
     }
 
+    @Test
+    void addMoneyHasBalanceOfAmountAdded() {
+        Wallet wallet = new Wallet();
 
+        wallet.addMoney(10);
+
+        assertThat(wallet.balance())
+                .isEqualTo(10);
+    }
 }
