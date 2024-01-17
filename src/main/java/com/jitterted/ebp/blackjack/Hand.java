@@ -64,4 +64,8 @@ public class Hand {
     boolean beats(Hand hand) {
         return hand.value() < value();
     }
+
+    boolean pushes(Hand hand) {
+        return value() == hand.value();
+    }
 }

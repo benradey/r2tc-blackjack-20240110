@@ -80,9 +80,9 @@ public class Game {
             System.out.println("You Busted, so you lose.  💸");
         } else if (dealerHand.isBusted()) {
             System.out.println("Dealer went BUST, Player wins! Yay for you!! 💵");
-        } else if (playerHand.beats(dealerHand)) { // playerHand.beats(dealerHand)
+        } else if (playerHand.beats(dealerHand)) {
             System.out.println("You beat the Dealer! 💵");
-        } else if (dealerHand.value() == playerHand.value()) {
+        } else if (dealerHand.pushes(playerHand)) {
             System.out.println("Push: You tie with the Dealer. 💸");
         } else {
             System.out.println("You lost to the Dealer. 💸");
