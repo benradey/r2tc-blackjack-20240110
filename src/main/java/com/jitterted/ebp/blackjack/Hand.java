@@ -56,4 +56,12 @@ public class Hand {
     boolean isBusted() {
         return value() > 21;
     }
+
+    boolean shouldDealerHit() {
+        return value() <= 16;
+    }
+
+    boolean beats(Hand hand) {
+        return hand.value() < value();
+    }
 }
