@@ -13,12 +13,12 @@ public class Wallet {
     }
 
     public void addMoney(int amount) {
-        requireAmountNotNegative(amount);
+        requireGreaterThanZero(amount);
         balance += amount;
     }
 
-    private void requireAmountNotNegative(int amount) {
-        if (amount <= -1) {
+    private void requireGreaterThanZero(int amount) {
+        if (amount <= 0) {
             throw new IllegalArgumentException();
         }
     }
