@@ -3,7 +3,6 @@ package com.jitterted.ebp.blackjack;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -14,7 +13,7 @@ public class Game {
 
     private final Deck deck;
 
-    private final List<Card> playerHand = new ArrayList<>();
+    private final Hand playerHand = new Hand();
     private final Hand dealerHand = new Hand();
 
     public static void main(String[] args) {
@@ -73,7 +72,7 @@ public class Game {
     }
 
     private void dealCardToPlayer() {
-        playerHand.add(deck.draw());
+        playerHand.getCards().add(deck.draw());
     }
 
     public void play() {
@@ -91,9 +90,9 @@ public class Game {
             System.out.println("You Busted, so you lose.  💸");
         } else if (handValueOf(dealerHand.getCards()) > 21) {
             System.out.println("Dealer went BUST, Player wins! Yay for you!! 💵");
-        } else if (handValueOf(dealerHand.getCards()) < handValueOf(playerHand)) {
+        } else if (handValueOf(dealerHand.getCards()) < handValueOf(playerHand.getCards())) {
             System.out.println("You beat the Dealer! 💵");
-        } else if (handValueOf(dealerHand.getCards()) == handValueOf(playerHand)) {
+        } else if (handValueOf(dealerHand.getCards()) == handValueOf(playerHand.getCards())) {
             System.out.println("Push: You tie with the Dealer. 💸");
         } else {
             System.out.println("You lost to the Dealer. 💸");
@@ -120,7 +119,7 @@ public class Game {
             }
             if (playerHits(playerChoice)) {
                 dealCardToPlayer();
-                if (handValueOf(playerHand) > 21) {
+                if (handValueOf(playerHand.getCards()) > 21) {
                     playerBusted = true;
                 }
             } else {
@@ -180,8 +179,8 @@ public class Game {
 
         System.out.println();
         System.out.println("Player has: ");
-        displayHand(playerHand);
-        System.out.println(" (" + handValueOf(playerHand) + ")");
+        displayHand(playerHand.getCards());
+        System.out.println(" (" + handValueOf(playerHand.getCards()) + ")");
     }
 
     private void displayFinalGameState() {
@@ -192,8 +191,8 @@ public class Game {
 
         System.out.println();
         System.out.println("Player has: ");
-        displayHand(playerHand);
-        System.out.println(" (" + handValueOf(playerHand) + ")");
+        displayHand(playerHand.getCards());
+        System.out.println(" (" + handValueOf(playerHand.getCards()) + ")");
     }
 
     private void displayBackOfCard() {
