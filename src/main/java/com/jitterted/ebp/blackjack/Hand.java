@@ -21,6 +21,7 @@ public class Hand {
     }
 
     void drawCardFrom(Deck deck) {
+        // require that this Hand is NOT busted
         cards.add(deck.draw());
     }
 
@@ -54,6 +55,7 @@ public class Hand {
     }
 
     boolean beats(Hand hand) {
+        // ensure neither hand is Busted
         return hand.value() < value();
     }
 
