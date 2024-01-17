@@ -14,7 +14,7 @@ public class HandValueAceTest {
     public void handWithOneAceTwoCardsIsValuedAt11() throws Exception {
         List<Card> cards = List.of(new Card(IRRELEVANT_SUIT, "A"),
                                    new Card(IRRELEVANT_SUIT, "5"));
-        Hand hand = new Hand(cards);
+        Hand hand = Hand.createHandForTest(cards);
 
         assertThat(hand.value())
                 .isEqualTo(11 + 5);
@@ -25,7 +25,7 @@ public class HandValueAceTest {
         List<Card> cards = List.of(new Card(IRRELEVANT_SUIT, "A"),
                                    new Card(IRRELEVANT_SUIT, "8"),
                                    new Card(IRRELEVANT_SUIT, "3"));
-        Hand hand = new Hand(cards);
+        Hand hand = Hand.createHandForTest(cards);
 
         assertThat(hand.value())
                 .isEqualTo(1 + 8 + 3);
