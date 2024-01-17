@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -12,23 +13,33 @@ public class HandValueAceTest {
 
     @Test
     public void handWithOneAceTwoCardsIsValuedAt11() throws Exception {
-        List<Card> cards = List.of(new Card(IRRELEVANT_SUIT, "A"),
-                                   new Card(IRRELEVANT_SUIT, "5"));
-        Hand hand = Hand.createHandForTest(cards);
+        Hand hand = createHand("A", "9");
 
         assertThat(hand.value())
-                .isEqualTo(11 + 5);
+                .isEqualTo(11 + 9);
     }
 
     @Test
     public void handWithOneAceAndOtherCardsEqualTo11IsValuedAt1() throws Exception {
-        List<Card> cards = List.of(new Card(IRRELEVANT_SUIT, "A"),
-                                   new Card(IRRELEVANT_SUIT, "8"),
-                                   new Card(IRRELEVANT_SUIT, "3"));
-        Hand hand = Hand.createHandForTest(cards);
+        Hand hand = createHand("A", "8", "3");
 
         assertThat(hand.value())
                 .isEqualTo(1 + 8 + 3);
     }
 
+    @Test
+    void handWithOneAceAndOtherCardsValuedAt10ThenAceIsValuedAt11() {
+        Hand hand = createHand("A", "K");
+
+        assertThat(hand.value())
+                .isEqualTo(11 + 10); // EVIDENT DATA
+    }
+
+    private Hand createHand(String... ranks) {
+        List<Card> cards = new ArrayList<>();
+        for (String rank : ranks) {
+            cards.add(new Card(IRRELEVANT_SUIT, rank));
+        }
+        return Hand.createHandForTest(cards);
+    }
 }

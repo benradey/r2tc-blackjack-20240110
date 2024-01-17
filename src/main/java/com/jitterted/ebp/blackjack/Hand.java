@@ -35,15 +35,11 @@ public class Hand {
                 .anyMatch(card -> card.rankValue() == 1);
 
         // if the total hand value <= 11, then count the Ace as 11 by adding 10
-        if (hasAce && handValue < 11) {
+        if (hasAce && handValue <= 11) {
             handValue += 10;
         }
 
         return handValue;
-    }
-
-    Card faceUpCard() {
-        return cards.get(0);
     }
 
     void display() {
@@ -57,15 +53,19 @@ public class Hand {
         return value() > 21;
     }
 
-    boolean shouldDealerHit() {
-        return value() <= 16;
-    }
-
     boolean beats(Hand hand) {
         return hand.value() < value();
     }
 
     boolean pushes(Hand hand) {
         return value() == hand.value();
+    }
+
+    Card faceUpCard() {
+        return cards.get(0);
+    }
+
+    boolean shouldDealerHit() {
+        return value() <= 16;
     }
 }
