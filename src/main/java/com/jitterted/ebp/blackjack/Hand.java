@@ -9,22 +9,17 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class Hand {
     private final List<Card> cards = new ArrayList<Card>();
 
-    @Deprecated // scaffolding
-    public List<Card> getCards() {
-        return cards;
-    }
-
     void drawCardFrom(Deck deck) {
-        getCards().add(deck.draw());
+        cards.add(deck.draw());
     }
 
     int value() {
-        int handValue = getCards()
+        int handValue = cards
                 .stream()
                 .mapToInt(Card::rankValue)
                 .sum();
 
-        boolean hasAce = getCards()
+        boolean hasAce = cards
                 .stream()
                 .anyMatch(card -> card.rankValue() == 1);
 
@@ -37,13 +32,13 @@ public class Hand {
     }
 
     Card faceUpCard() {
-        return getCards().get(0);
+        return cards.get(0);
     }
 
     void display() {
-        System.out.println(getCards().stream()
-                                     .map(Card::display)
-                                     .collect(Collectors.joining(
+        System.out.println(cards.stream()
+                                .map(Card::display)
+                                .collect(Collectors.joining(
                                              ansi().cursorUp(6).cursorRight(1).toString())));
     }
 }
