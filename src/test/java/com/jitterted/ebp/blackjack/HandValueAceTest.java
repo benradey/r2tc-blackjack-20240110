@@ -35,6 +35,15 @@ public class HandValueAceTest {
                 .isEqualTo(11 + 10); // EVIDENT DATA
     }
 
+    @Test
+    void handWithOneAceAndOtherCardsEqualTo12AceIsValuedAt1() {
+        Hand hand = createHand("A", "8", "4");
+
+        assertThat(hand.value())
+                .isEqualTo(1 + 8 + 4);
+    }
+
+
     private Hand createHand(String... ranks) {
         List<Card> cards = new ArrayList<>();
         for (String rank : ranks) {
